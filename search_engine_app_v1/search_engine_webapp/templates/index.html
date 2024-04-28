@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Subtitles Search Engine</h1>
+        <form action="/" method="post">
+            <label for="query">Enter Your Query:</label><br>
+            <input type="text" id="query" name="query"><br>
+            <input type="submit" value="Search">
+            <button type="submit" name="clear" value="true">Clear</button>
+        </form>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+        {% if query %}
+            <h2>Search results for '{{ query }}':</h2>
+            <ul class="search-results">
+                {% for result in results %}
+                    <li class="result-item">
+                        <h3>File: {{ result.file }}</h3>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
